@@ -1,10 +1,15 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+name: 'Output Changed Files'
+description: 'get changed files in current commit'
+author: 'xmorse'
+# inputs:
+outputs:
+  changedDirs:
+    description: changed directories, accessible at steps.<step id>.outputs.changedDirs
 runs:
   using: 'node12'
   main: 'lib/main.js'
+
+branding:
+  icon: 'award'  
+  color: 'green'
+

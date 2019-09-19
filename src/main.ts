@@ -1,19 +1,13 @@
 import * as core from '@actions/core';
-import * as github from '@actions/github';
-import git from 'isomorphic-git'
-
-
-
+import getChangedDirs from './getChangedDirs'
 
 async function run() {
-  try {
-    let files = await git.listFiles({ dir: '/', ref: 'HEAD' })
-    const myInput = core.getInput('myInput');
-    core.debug(`Hello ${myInput}`);
-    core.exportVariable
-  } catch (error) {
-    core.setFailed(error.message);
-  }
+    console.log(JSON.stringify(process.env, null, '    '))
+    const dirs = await getChangedDirs('.', process.env.GITHUB_SHA)
+    core.setOutput('changedDirs', JSON.stringify(dirs)) // steps.<step id>.outputs
 }
+
+
+
 
 run();

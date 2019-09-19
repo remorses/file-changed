@@ -22,7 +22,8 @@
   "dependencies": {
     "@actions/core": "^1.0.0",
     "@actions/github": "^1.1.0",
-    "isomorphic-git": "^0.67.2",
+    "@types/lodash.groupby": "^4.6.6",
+    "lodash.groupby": "^4.6.0",
     "simple-git": "^1.126.0"
   },
   "devDependencies": {
