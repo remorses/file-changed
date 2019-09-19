@@ -4,7 +4,9 @@ author: 'xmorse'
 # inputs:
 outputs:
   changedDirs:
-    description: changed directories, accessible at steps.<step id>.outputs.changedDirs
+    description: changed directories, accessible at steps.<step id>.outputs.changedDirs, also exported in env as `changedDirs`
+  changedFiles:
+    description: changed files, also exported as variables as `changedFiles`
 runs:
   using: 'node12'
   main: 'lib/main.js'

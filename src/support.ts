@@ -3,23 +3,22 @@ import fs from 'fs'
 import path from 'path'
 import groupBy from 'lodash.groupby'
 
-// gitP('.')
-//     .revparse(['@~'])
-//     .then(console.log)
-
-export default (repo, sha) =>
+export const getChangedFiles = (repo, sha) =>
     gitP(repo)
         .diffSummary([sha + '~', sha])
-        // .then(console.log)
-        .then((summary) => {
-            return summary.files.map(({ file }) => ({
+        .then((summary) => summary.files.map(({ file }) => file))
+
+export const getChangedDirs = (repo, sha) =>
+    getChangedFiles(repo, sha)
+        .then((files) =>
+            files.map((file) => ({
                 dir: path.dirname(file),
                 file
             }))
-        })
+        )
         .then((directories) => {
             return groupBy(directories, (x) => x.dir)
         })
         .then((dict) => Object.keys(dict))
 
-// getChangedDirs('.', '@').then(console.log)
+// getChangedFiles('.', '@').then(console.log)
