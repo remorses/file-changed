@@ -1,9 +1,33 @@
-# Create a JavaScript Action using TypeScript
+# Export changed files to env and as outputs
 
-This template offers an easy way to get started writing a JavaScript action with TypeScript compile time support, unit testing with Jest and using the GitHub Actions Toolkit.
+## Usage
 
-## Getting Started
+### Example using in a monorepo to execute ci only when directory changes
+```yml
+on: [push]
 
-See the walkthrough located [here](https://github.com/actions/toolkit/blob/master/docs/typescript-action.md).
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: remorses/files-changed@master
+```
 
-In addition to walking your through how to create an action, it also provides strategies for versioning, releasing and referencing your actions.
+
+```yml
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: remorses/files-changed@master
+      id: x
+    - run: echo $changedDirs
+    - run: echo $changedFiles
+    - run: echo $X
+      env:
+        X: ${{ steps.x.outputs.changedDirs }}
+```
